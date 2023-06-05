@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 bootstrap="tests/PHPUnit/bootstrap.php"
+		 backupGlobals="false"
+		 colors="true"
+		 convertErrorsToExceptions="true"
+		 convertNoticesToExceptions="true"
+		 convertWarningsToExceptions="true"
+		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+	<coverage processUncoveredFiles="true">
+		<include>
+			<directory suffix=".php">./src</directory>
+		</include>
+		<exclude>
+			<directory>./tests</directory>
+			<directory>./vendor</directory>
+		</exclude>
+		<report>
+			<html outputDirectory="./coverage"/>
+		</report>
+	</coverage>
+	<php>
+		<env name="PATCHWORK_CACHE_USE_SYSTEM_TEMP_DIR" value="true"/>
+	</php>
+	<testsuites>
+		<testsuite name="WP SEO Crawler php unit tests">
+			<directory>./tests/PHPUnit/Unit</directory>
+		</testsuite>
+	</testsuites>
+	<logging/>
+</phpunit>
