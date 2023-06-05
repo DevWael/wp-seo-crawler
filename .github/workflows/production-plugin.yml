@@ -1,0 +1,40 @@
+name: Create WP production plugin zip file
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build-plugin-zip-asset:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP 8.0
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+
+      - name: Install dependencies
+        run: composer install --no-dev --ignore-platform-reqs --prefer-dist --no-scripts --optimize-autoloader
+
+      - name: Clean unneeded files
+        run: rm -r .gitattributes .github .git .gitignore .editorconfig .travis.yml Explanation.md phpcs.xml.dist phpunit.xml.dist tests/
+
+      - name: Create Artifact
+        run: |
+          zip -qq -r "wp-sew-crawler-plugin-${{ github.ref_name }}.zip" .
+
+      - name: "Upload release attachment"
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: wp-sew-crawler-plugin-${{ github.ref_name }}.zip
+          tag: ${{ github.ref_name }}
+          overwrite: true
+          body: |
+            # ${{ env.TAG_NAME }}
+            Full WordPress plugin in `wp-sew-crawler-plugin-${{ github.ref_name }}.zip`.
