@@ -1,2 +1,5 @@
 /vendor/*
 /Tests/env/local/
+/coverage
+coverage.xml
+/.idea
