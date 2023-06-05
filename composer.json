@@ -23,7 +23,8 @@
 		"source": "https://github.com/DevWael/wp-seo-crawler"
 	},
 	"require": {
-		"ext-json": "*"
+		"ext-json": "*",
+		"symfony/dom-crawler": "^6.0"
 	},
 	"require-dev": {
 		"php": "^5.6 || 7.* || ^8",
