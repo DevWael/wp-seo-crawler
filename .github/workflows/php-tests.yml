@@ -1,0 +1,48 @@
+name: PHP Tests
+on:
+  push:
+    branches:
+      - master
+jobs:
+  # Run php unit tests.
+  php-unit-tests:
+    needs: [ coding-standards-analysis-php ]
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    strategy:
+      matrix:
+        # Run on several php versions.
+        php-version: [7.4, 8.0, 8.1]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+        # Do composer install only if the vendor directory not cached.
+      - name: Install dependencies
+        run: composer install -q -n -a --no-progress --prefer-dist
+
+        # Run composer script to run php syntax checks.
+      - name: Run Check PHP Syntax
+        run: composer phpcs:fix
+
+        # Run composer script to run php coding standards checks.
+      - name: Run check PHP Coding Standards
+        run: composer phpcs
+
+        # Run composer script to run phpunit tests.
+      - name: Run PHPUnit
+        run: composer tests:codecov
+
+        # Upload test report to CodeCov.
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          flags: php-unit-tests
+          name: codecov-umbrella
