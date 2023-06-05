@@ -5,27 +5,35 @@
 	"license": "GPL-2.0+",
 	"authors": [
 		{
-			"name": "WP Media",
-			"email": "contact@wp-media.me",
-			"homepage": "https://wp-media.me"
+			"name": "Ahmad Wael",
+			"email": "dev.ahmedwael@gmail.com",
+			"homepage": "https://www.bbioon.com"
 		}
 	],
+	"minimum-stability": "stable",
 	"type": "library",
 	"config": {
-		"sort-packages": true
+		"sort-packages": true,
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
 	},
 	"support": {
-		"issues": "https://github.com/wp-media/package-template/issues",
-		"source": "https://github.com/wp-media/package-template"
+		"issues": "https://github.com/DevWael/wp-seo-crawler/issues",
+		"source": "https://github.com/DevWael/wp-seo-crawler"
+	},
+	"require": {
+		"php": ">=7.4",
+		"ext-json": "*"
 	},
 	"require-dev": {
-		"php": "^5.6 || ^7",
+		"php": "^5.6 || ^8",
 		"brain/monkey": "^2.0",
-		"dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
-		"phpcompatibility/phpcompatibility-wp": "^2.0",
-		"phpunit/phpunit": "^5.7 || ^7",
-		"wp-coding-standards/wpcs": "^2",
-		"wp-media/phpunit": "dev-master"
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1.4",
+		"phpunit/phpunit": "^5.7 || ^8",
+		"wp-coding-standards/wpcs": "^2.3.0",
+		"wp-media/phpunit": "v3.0.3"
 	},
 	"autoload": {},
 	"autoload-dev": {},
@@ -39,6 +47,10 @@
 		"install-codestandards": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
 		"phpcs": "phpcs --basepath=.",
 		"phpcs-changed": "./bin/phpcs-changed.sh",
-		"phpcs:fix": "phpcbf"
+		"phpcs:fix": "phpcbf",
+		"qa": [
+			"@phpcs",
+			"@test-unit"
+		]
 	}
 }
