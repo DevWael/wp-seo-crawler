@@ -35,7 +35,7 @@ jobs:
 
         # Run composer script to run phpunit tests.
       - name: Run PHPUnit
-        run: composer tests:codecov
+        run: composer test-unit-coverage
 
         # Upload test report to CodeCov.
       - name: Upload coverage reports to Codecov
