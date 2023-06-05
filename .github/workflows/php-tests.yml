@@ -6,7 +6,6 @@ on:
 jobs:
   # Run php unit tests.
   php-unit-tests:
-    needs: [ coding-standards-analysis-php ]
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     strategy:
