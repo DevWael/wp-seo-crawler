@@ -24,7 +24,8 @@
 	},
 	"require": {
 		"ext-json": "*",
-		"symfony/dom-crawler": "^5.4"
+		"symfony/dom-crawler": "^5.4",
+		"woocommerce/action-scheduler": "^3.6"
 	},
 	"require-dev": {
 		"php": "^7 || ^8",
