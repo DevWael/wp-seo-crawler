@@ -1,8 +1,8 @@
 {
-	"name": "wp-media/package-template",
-	"description": "Repository template for our packages",
-	"homepage": "https://github.com/wp-media/package-template",
-	"license": "GPL-2.0+",
+	"name": "devwael/wp-seo-crawler",
+	"description": "WordPress plugin that crawl the website and generate a report for SEO issues and HTML sitemap.",
+	"homepage": "https://github.com/DevWael/wp-seo-crawler",
+	"license": "GPL-3.0+",
 	"authors": [
 		{
 			"name": "Ahmad Wael",
