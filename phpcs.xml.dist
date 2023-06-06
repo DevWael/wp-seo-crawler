@@ -21,7 +21,7 @@
 
 	<!-- Rules: Check PHP version compatibility - see https://github.com/PHPCompatibility/PHPCompatibilityWP -->
 	<rule ref="PHPCompatibility"/>
-	<config name="testVersion" value="7.1"/>
+	<config name="testVersion" value="7.2"/>
 	<config name="minimum_supported_wp_version" value="4.9"/>
 
 	<rule ref="WordPress">
