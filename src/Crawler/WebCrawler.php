@@ -101,11 +101,19 @@ class WebCrawler implements CrawlerEngine {
 		$links      = $this->crawler->filter( 'a' );
 		if ( ! empty( $links ) ) {
 			foreach ( $links as $link ) {
+				// Skip links that don't have href attribute.
 				if ( ! $link->hasAttribute( 'href' ) ) {
 					continue;
 				}
+
+				$href = $link->getAttribute( 'href' );
+				// Skip links that start with #.
+				if ( 0 === strpos( $href, '#' ) ) {
+					continue;
+				}
+
 				$links_data[] = [
-					'href'  => $link->getAttribute( 'href' ),
+					'href'  => $href,
 					//phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 					'text'  => $link->textContent,
 					'title' => $link->getAttribute( 'title' ),
