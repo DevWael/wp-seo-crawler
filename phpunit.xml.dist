@@ -7,18 +7,6 @@
 		 convertNoticesToExceptions="true"
 		 convertWarningsToExceptions="true"
 		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-	<coverage processUncoveredFiles="true">
-		<include>
-			<directory suffix=".php">./src</directory>
-		</include>
-		<exclude>
-			<directory>./tests</directory>
-			<directory>./vendor</directory>
-		</exclude>
-		<report>
-			<html outputDirectory="./coverage"/>
-		</report>
-	</coverage>
 	<php>
 		<env name="PATCHWORK_CACHE_USE_SYSTEM_TEMP_DIR" value="true"/>
 	</php>
@@ -27,5 +15,17 @@
 			<directory>./tests/PHPUnit/Unit</directory>
 		</testsuite>
 	</testsuites>
-	<logging/>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">./src</directory>
+			<exclude>
+				<directory>./tests</directory>
+				<directory>./vendor</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="coverage-clover" target="./coverage.xml"/>
+		<log type="coverage-html" target="./coverage"/>
+	</logging>
 </phpunit>

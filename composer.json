@@ -24,14 +24,14 @@
 	},
 	"require": {
 		"ext-json": "*",
-		"fabpot/goutte": "^4.0.3"
+		"symfony/dom-crawler": "^5.4"
 	},
 	"require-dev": {
 		"php": "^7 || ^8",
 		"brain/monkey": "^2.6.1",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
 		"phpcompatibility/phpcompatibility-wp": "^2.1.4",
-		"phpunit/phpunit": "^9.6.8",
+		"phpunit/phpunit": "^8.5 || ^9.6.8",
 		"wp-coding-standards/wpcs": "^2.3.0",
 		"wp-media/phpunit": "v3.0.3"
 	},
