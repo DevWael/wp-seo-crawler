@@ -85,7 +85,7 @@ class WebCrawler implements CrawlerEngine {
 	 *
 	 * @param array|\WP_Error $response HTTP response.
 	 *
-	 * @return string The body of the response. Empty string if no body or incorrect parameter given.
+	 * @return string The body of the response. Empty string if body is empty or incorrect parameter given.
 	 */
 	protected function get_response_body( $response ): string {
 		return \wp_remote_retrieve_body( $response );
@@ -107,8 +107,60 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				$href = $link->getAttribute( 'href' );
+
+				// Skip empty links.
+				if ( empty( $href ) ) {
+					continue;
+				}
+
 				// Skip links that start with #.
-				if ( 0 === strpos( $href, '#' ) ) {
+				if ( $this->starts_with( $href, '#' ) ) {
+					continue;
+				}
+
+				// Skip links that start with javascript.
+				if ( $this->starts_with( $href, 'javascript' ) ) {
+					continue;
+				}
+
+				// Skip links to the admin area.
+				if ( $this->contains( $href, esc_url( admin_url() ) ) ) {
+					continue;
+				}
+
+				// Skip links to the login page.
+				if ( $this->contains( $href, esc_url( wp_login_url() ) ) ) {
+					continue;
+				}
+
+				// Skip links to the logout page.
+				if ( $this->contains( $href, esc_url( wp_logout_url() ) ) ) {
+					continue;
+				}
+
+				// Skip links to the register page.
+				if ( $this->contains( $href, esc_url( wp_registration_url() ) ) ) {
+					continue;
+				}
+
+				// Skip links to the lost password page.
+				if ( $this->contains( $href, esc_url( wp_lostpassword_url() ) ) ) {
+					continue;
+				}
+
+				// Skip links to the home page.
+				if ( $this->contains( $href, esc_url( home_url() ) ) ) {
+					continue;
+				}
+
+				// Skip links to the current page.
+				if ( $this->contains( $href, esc_url( $this->url ) ) ) {
+					continue;
+				}
+
+				// Skip links from custom functionality.
+				$skip = \apply_filters( 'wpseoc_skip_link', false, $href, $this->url, $this );
+				if ( $skip ) {
 					continue;
 				}
 
@@ -125,6 +177,30 @@ class WebCrawler implements CrawlerEngine {
 		$this->crawler->clear();
 
 		return $links_data;
+	}
+
+	/**
+	 * Check if the string starts with the given substring.
+	 *
+	 * @param string $haystack The string to search in.
+	 * @param string $needle   The substring to search for.
+	 *
+	 * @return bool
+	 */
+	public function starts_with( string $haystack, string $needle ): bool {
+		return strpos( $haystack, $needle ) === 0;
+	}
+
+	/**
+	 * Check if the string contains the given substring.
+	 *
+	 * @param string $haystack The string to search in.
+	 * @param string $needle   The substring to search for.
+	 *
+	 * @return bool
+	 */
+	public function contains( string $haystack, string $needle ): bool {
+		return strpos( $haystack, $needle ) !== false;
 	}
 
 	/**
