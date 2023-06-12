@@ -10,8 +10,8 @@ class Admin_Page implements Options_Page {
 	/**
 	 * Add options page to the admin menu.
 	 */
-	public function options_page(): void {
-		\add_options_page(
+	public function admin_page(): void {
+		\add_menu_page(
 			\esc_html__( 'Seo Crawler', 'wp-seo-crawler' ),     // Page title.
 			\esc_html__( 'Seo Crawler', 'wp-seo-crawler' ),     // Menu title.
 			'manage_options',         // Capability required to access the page.

@@ -7,7 +7,7 @@ interface Options_Page {
 	/**
 	 * Add options page to the admin menu.
 	 */
-	public function options_page(): void;
+	public function admin_page(): void;
 
 	/**
 	 * Render the options page.
