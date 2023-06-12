@@ -15,6 +15,17 @@ class Admin_Page implements Options_Page {
 			\esc_html__( 'Seo Crawler', 'wp-seo-crawler' ),     // Page title.
 			\esc_html__( 'Seo Crawler', 'wp-seo-crawler' ),     // Menu title.
 			'manage_options',         // Capability required to access the page.
+			'wp-seo-crawler',     // Menu slug.
+			[ $this, 'crawl_report' ], // Callback function to render the page.
+			'dashicons-admin-links',
+			40
+		);
+
+		\add_submenu_page(
+			'wp-seo-crawler',     // Parent slug.
+			\esc_html__( 'Settings', 'wp-seo-crawler' ),     // Page title.
+			\esc_html__( 'Settings', 'wp-seo-crawler' ),     // Menu title.
+			'manage_options',         // Capability required to access the page.
 			'wp-seo-crawler-settings',     // Menu slug.
 			[ $this, 'render' ] // Callback function to render the page.
 		);
