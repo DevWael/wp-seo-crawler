@@ -22,12 +22,10 @@ class WebCrawler implements CrawlerEngine {
 	/**
 	 * LinksCrawler constructor.
 	 *
-	 * @param Crawler $crawler The Symfony DomCrawler object.
-	 * @param string  $url     The link string.
+	 * @param Crawler|null $crawler The Symfony DomCrawler object.
 	 */
-	public function __construct( Crawler $crawler, string $url ) {
-		$this->crawler = $crawler;
-		$this->url     = $url;
+	public function __construct( Crawler $crawler = null ) {
+		$this->crawler = $crawler ?? new Crawler();
 	}
 
 	/**
@@ -53,12 +51,26 @@ class WebCrawler implements CrawlerEngine {
 	}
 
 	/**
+	 * Add URL that will be crawled.
+	 *
+	 * @param string $url url to crawl.
+	 *
+	 * @return void
+	 */
+	public function set_url( string $url ): void {
+		$this->url = $url;
+	}
+
+	/**
 	 * Send HTTP GET request to url and get response.
 	 *
 	 * @return array The response.
 	 * @throws \RuntimeException If the page is not loaded.
 	 */
 	private function get_request(): array {
+		if ( ! isset( $this->url ) ) {
+			throw new \RuntimeException( esc_html__( 'The url is not set', 'wp-seo-crawler' ) );
+		}
 		$response = \wp_remote_get( $this->url );
 		if ( \is_wp_error( $response ) ) {
 			throw new \RuntimeException( $response->get_error_message() );
