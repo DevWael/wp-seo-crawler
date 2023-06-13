@@ -3,8 +3,8 @@
 namespace DevWael\WpSeoCrawler;
 
 use DevWael\WpSeoCrawler\admin\Admin_Page;
-use DevWael\WpSeoCrawler\Background_Workers\Hourly_Crawl;
-use DevWael\WpSeoCrawler\Background_Workers\Immediate_Crawl;
+use DevWael\WpSeoCrawler\Background_Workers\HourlyCrawl;
+use DevWael\WpSeoCrawler\Background_Workers\ImmediateCrawl;
 
 /**
  * The plugin main class that responsible for loading all plugin logic.
@@ -30,28 +30,28 @@ final class WpSeoCrawler {
 	/**
 	 * Immediate Crawl object.
 	 *
-	 * @var Immediate_Crawl $immediate_crawl instance of the immediate crawl.
+	 * @var ImmediateCrawl $immediate_crawl instance of the immediate crawl.
 	 */
 	private $immediate_crawl;
 
 	/**
 	 * Hourly Crawl object.
 	 *
-	 * @var Hourly_Crawl $hourly_crawl instance of the hourly crawl.
+	 * @var HourlyCrawl $hourly_crawl instance of the hourly crawl.
 	 */
 	private $hourly_crawl;
 
 	/**
 	 * WpSeoCrawler constructor.
 	 *
-	 * @param Admin_Page      $admin_page      instance of the admin page.
-	 * @param Immediate_Crawl $immediate_crawl instance of the immediate crawl.
-	 * @param Hourly_Crawl    $hourly_crawl    instance of the hourly crawl.
+	 * @param Admin_Page     $admin_page      instance of the admin page.
+	 * @param ImmediateCrawl $immediate_crawl instance of the immediate crawl.
+	 * @param HourlyCrawl    $hourly_crawl    instance of the hourly crawl.
 	 */
 	private function __construct(
 		Admin_Page $admin_page,
-		Immediate_Crawl $immediate_crawl,
-		Hourly_Crawl $hourly_crawl
+		ImmediateCrawl $immediate_crawl,
+		HourlyCrawl $hourly_crawl
 	) {
 		$this->admin_page      = $admin_page;
 		$this->immediate_crawl = $immediate_crawl;
@@ -61,21 +61,21 @@ final class WpSeoCrawler {
 	/**
 	 * Load class singleton instance.
 	 *
-	 * @param Admin_Page|null      $admin_page      instance of the admin page.
-	 * @param Immediate_Crawl|null $immediate_crawl instance of the immediate crawl.
-	 * @param Hourly_Crawl|null    $hourly_crawl    instance of the hourly crawl.
+	 * @param Admin_Page|null     $admin_page      instance of the admin page.
+	 * @param ImmediateCrawl|null $immediate_crawl instance of the immediate crawl.
+	 * @param HourlyCrawl|null    $hourly_crawl    instance of the hourly crawl.
 	 *
 	 * @return WpSeoCrawler singleton instance
 	 */
 	public static function instance(
 		Admin_Page $admin_page = null,
-		Immediate_Crawl $immediate_crawl = null,
-		Hourly_Crawl $hourly_crawl = null
+		ImmediateCrawl $immediate_crawl = null,
+		HourlyCrawl $hourly_crawl = null
 	): ?WpSeoCrawler {
 		if ( null === self::$instance ) {
 			$admin_page_object      = $admin_page ?? new Admin_Page(); // new instance of Admin_Page object.
-			$immediate_crawl_object = $immediate_crawl ?? new Immediate_Crawl(); // new instance of Immediate_Crawl object.
-			$hourly_crawl_object    = $hourly_crawl ?? new Hourly_Crawl(); // new instance of Hourly_Crawl object.
+			$immediate_crawl_object = $immediate_crawl ?? new ImmediateCrawl(); // new instance of ImmediateCrawl object.
+			$hourly_crawl_object    = $hourly_crawl ?? new HourlyCrawl(); // new instance of Hourly_Crawl object.
 			self::$instance         = new self( $admin_page_object, $immediate_crawl_object, $hourly_crawl_object );
 			self::$instance->init();
 		}

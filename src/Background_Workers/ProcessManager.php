@@ -2,14 +2,13 @@
 
 namespace DevWael\WpSeoCrawler\Background_Workers;
 
-interface Process_Manager {
-
+interface ProcessManager {
 	/**
 	 * Schedule the crawl task.
 	 *
 	 * @return void
 	 */
-	public function schedule_task(): void;
+	public function schedule(): void;
 
 	/**
 	 * Check if the task is scheduled.
@@ -17,6 +16,13 @@ interface Process_Manager {
 	 * @return bool
 	 */
 	public function is_scheduled(): bool;
+
+	/**
+	 * Unschedule the crawl task.
+	 *
+	 * @return void
+	 */
+	public function unschedule(): void;
 
 	/**
 	 * Process the crawl task.
