@@ -167,7 +167,7 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				// Skip links to the home page.
-				if ( $this->contains( $href, esc_url( home_url() ) ) ) {
+				if ( \esc_url( $href ) === \esc_url( \home_url() ) ) {
 					continue;
 				}
 
