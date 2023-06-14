@@ -413,6 +413,23 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 		$crawler->crawl();
 	}
 
+	public function testCrawlThrowsRuntimeExceptionIfRequestFailed(){
+		$error = new class {
+			// phpcs:disable
+			public function get_error_message(): string
+			{
+				return 'error';
+			}
+			// phpcs:enable
+		};
+		Functions\expect( 'wp_remote_get' )->andReturn( $error );
+		Functions\expect( 'is_wp_error' )->andReturn( true );
+		$crawler = new WebCrawler( new Crawler() );
+		$crawler->set_url( 'https://example.com/nonexistent' );
+		$this->expectException(\RuntimeException::class);
+		$crawler->crawl();
+	}
+
 	public function testCrawlThrowsRuntimeExceptionIfEmptyHtml() {
 		Functions\expect( 'wp_remote_get' )->andReturn( [
 			'body'     => '',
