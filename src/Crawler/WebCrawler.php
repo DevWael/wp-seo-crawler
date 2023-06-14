@@ -147,7 +147,7 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				// Skip links to the login page.
-				if ( $this->contains( $href, esc_url( wp_login_url() ) ) ) {
+				if ( \esc_url( $href ) === \esc_url( \wp_login_url() ) ) {
 					continue;
 				}
 
