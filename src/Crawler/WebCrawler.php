@@ -157,7 +157,7 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				// Skip links to the register page.
-				if ( $this->contains( $href, esc_url( wp_registration_url() ) ) ) {
+				if ( \esc_url( $href ) === \esc_url( \wp_registration_url() ) ) {
 					continue;
 				}
 
