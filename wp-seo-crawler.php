@@ -5,7 +5,7 @@
  * @package           DevWael\WpSeoCrawler
  * @author            Ahmad Wael
  * @copyright         2023 Ahmad Wael
- * @license           GPL-2.0+
+ * @license           GPL-3.0+
  *
  * @wordpress-plugin
  * Plugin Name: WP SEO Crawler
@@ -16,8 +16,8 @@
  * Author URI: https://www.bbioon.com
  * Requires at least: 5.9
  * Requires PHP: 7.4
- * License: GPL-2.0+
- * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * License: GPL-3.0+
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: wp-seo-crawler
  * Domain Path: /languages
  */
