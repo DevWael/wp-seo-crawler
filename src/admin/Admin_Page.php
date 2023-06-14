@@ -2,6 +2,9 @@
 
 namespace DevWael\WpSeoCrawler\admin;
 
+use DevWael\WpSeoCrawler\Background_Workers\HourlyCrawl;
+use DevWael\WpSeoCrawler\Background_Workers\ImmediateCrawl;
+
 /**
  * Admin page
  */
@@ -15,12 +18,40 @@ class Admin_Page implements Options_Page {
 	private $request;
 
 	/**
+	 * Immediate Crawl background task object.
+	 *
+	 * @var ImmediateCrawl
+	 */
+	private $immediate_crawl;
+
+	/**
+	 * Hourly Crawl background task object.
+	 *
+	 * @var HourlyCrawl
+	 */
+	private $hourly_crawl;
+
+	/**
 	 * Admin_Page constructor.
 	 *
-	 * @param Request|null $request request object.
+	 * @param Request|null        $request         request object.
+	 * @param ImmediateCrawl|null $immediate_crawl Immediate Crawl background task object.
+	 * @param HourlyCrawl|null    $hourly_crawl    Hourly Crawl background task object.
 	 */
-	public function __construct( Request $request = null ) {
-		$this->request = $request ?? new Request();
+	public function __construct(
+		Request $request = null,
+		ImmediateCrawl $immediate_crawl = null,
+		HourlyCrawl $hourly_crawl = null
+	) {
+		$this->request         = $request ?? new Request();
+		$args                  = apply_filters(
+			'wpseoc_crawler_task_args',
+			[
+				'url' => esc_url( home_url() ),
+			]
+		);
+		$this->immediate_crawl = $immediate_crawl ?? new ImmediateCrawl( $args );
+		$this->hourly_crawl    = $hourly_crawl ?? new HourlyCrawl( $args );
 	}
 
 	/**
@@ -86,32 +117,104 @@ class Admin_Page implements Options_Page {
 	 * Process the options page form data
 	 */
 	public function process_save_options(): void {
+		// Check the nonce.
 		$this->check_nonce();
+
+		// Check the user has administrator permissions.
 		$this->check_permissions();
+
+		// Save the options.
 		$result = $this->save_options();
-		$this->safe_redirect( $result );
+
+		// Start or cancel the background tasks.
+		if ( 'success' === $result['status'] ) {
+			if ( 'on' === $result['value'] ) {
+				// Start the background tasks.
+				$this->start_instant_crawl();
+				$this->start_hourly_crawl();
+			} else {
+				// Cancel the background tasks.
+				$this->cancel_instant_crawl();
+				$this->cancel_hourly_crawl();
+			}
+		}
+
+		// Redirect to the options page.
+		$this->safe_redirect( $result['status'] );
 	}
 
 	/**
 	 * Save the options page form data
 	 *
-	 * @return string status of the operation.
+	 * @return array status of the operation and the user selected value on success.
 	 */
-	private function save_options(): string {
+	private function save_options(): array {
 		$request_query = $this->request->post();
 		if ( ! isset( $request_query['wpseoc_crawl_status'] ) ) {
-			return 'error_1';
+			return [ 'status' => 'error_1' ];
 		}
 		$status = \sanitize_text_field( \wp_unslash( $request_query['wpseoc_crawl_status'] ) );
 		if ( ! in_array( $status, [ 'on', 'off' ], true ) ) {
-			return 'error_2';
+			return [ 'status' => 'error_2' ];
 		}
 		$settings = [
 			'wpseoc_crawl_active' => $status,
 		];
+		// Save the settings.
 		\update_option( 'wpseoc_options', $settings );
 
-		return 'success';
+		return [
+			'status' => 'success',
+			'value'  => $status,
+		];
+	}
+
+	/**
+	 * Start the immediate crawl background task.
+	 *
+	 * @return void
+	 */
+	public function start_instant_crawl(): void {
+		$task = $this->immediate_crawl;
+		if ( false === $task->is_scheduled() ) {
+			$task->schedule();
+		}
+	}
+
+	/**
+	 * Cancel the immediate crawl background task.
+	 *
+	 * @return void
+	 */
+	public function cancel_instant_crawl(): void {
+		$task = $this->immediate_crawl;
+		if ( true === $task->is_scheduled() ) {
+			$task->unschedule();
+		}
+	}
+
+	/**
+	 * Start the hourly crawl background task.
+	 *
+	 * @return void
+	 */
+	public function start_hourly_crawl(): void {
+		$task = $this->hourly_crawl;
+		if ( false === $task->is_scheduled() ) {
+			$task->schedule();
+		}
+	}
+
+	/**
+	 * Cancel the hourly crawl background task.
+	 *
+	 * @return void
+	 */
+	public function cancel_hourly_crawl(): void {
+		$task = $this->hourly_crawl;
+		if ( true === $task->is_scheduled() ) {
+			$task->unschedule();
+		}
 	}
 
 	/**
