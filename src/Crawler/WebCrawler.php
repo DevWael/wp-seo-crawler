@@ -231,7 +231,7 @@ class WebCrawler implements CrawlerEngine {
 	 */
 	protected function add_html( string $html ): void {
 		if ( empty( $html ) ) {
-			throw new \RuntimeException( esc_html__( 'The page is not loaded.', 'wp-seo-crawler' ) );
+			throw new \RuntimeException( esc_html__( 'The page is not loaded .', 'wp-seo-crawler' ) );
 		}
 		// Add the html content to the crawler object.
 		$this->crawler->addHtmlContent( $html );
