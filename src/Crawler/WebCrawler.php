@@ -38,7 +38,7 @@ class WebCrawler implements CrawlerEngine {
 		$data     = [];
 		$response = $this->get_request();
 		if ( ! $this->is_response_ok( $response ) ) {
-			throw new \RuntimeException( esc_html__( 'Failed to fetch that URL', 'wp-seo-crawler' ) );
+			throw new \RuntimeException( \esc_html__( 'Failed to fetch that URL', 'wp-seo-crawler' ) );
 		}
 		$html = $this->get_response_body( $response );
 		$this->add_html( $html );
@@ -69,7 +69,7 @@ class WebCrawler implements CrawlerEngine {
 	 */
 	private function get_request(): array {
 		if ( ! isset( $this->url ) ) {
-			throw new \RuntimeException( esc_html__( 'The url is not set', 'wp-seo-crawler' ) );
+			throw new \RuntimeException( \esc_html__( 'The url is not set', 'wp-seo-crawler' ) );
 		}
 		$response = \wp_remote_get(
 			$this->url,
@@ -142,7 +142,7 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				// Skip links to the admin area.
-				if ( $this->contains( $href, esc_url( admin_url() ) ) ) {
+				if ( $this->contains( $href, \esc_url( \admin_url() ) ) ) {
 					continue;
 				}
 
@@ -152,7 +152,7 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				// Skip links to the logout page.
-				if ( $this->contains( $href, esc_url( wp_logout_url() ) ) ) {
+				if ( $this->contains( $href, \esc_url( \wp_logout_url() ) ) ) {
 					continue;
 				}
 
@@ -231,7 +231,7 @@ class WebCrawler implements CrawlerEngine {
 	 */
 	protected function add_html( string $html ): void {
 		if ( empty( $html ) ) {
-			throw new \RuntimeException( esc_html__( 'The page is not loaded .', 'wp-seo-crawler' ) );
+			throw new \RuntimeException( \esc_html__( 'The page is not loaded.', 'wp-seo-crawler' ) );
 		}
 		// Add the html content to the crawler object.
 		$this->crawler->addHtmlContent( $html );
