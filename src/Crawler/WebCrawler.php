@@ -137,48 +137,52 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				// Skip links that start with javascript.
-				if ( $this->starts_with( $href, 'javascript' ) ) {
+				if ( $this->is_start_with_javascript( $href ) ) {
+					continue;
+				}
+
+				// Skip out links.
+				if ( ! $this->is_internal_link( $href ) ) {
 					continue;
 				}
 
 				// Skip links to the admin area.
-				if ( $this->contains( $href, \esc_url( \admin_url() ) ) ) {
+				if ( $this->is_admin_link( $href ) ) {
 					continue;
 				}
 
 				// Skip links to the login page.
-				if ( \esc_url( $href ) === \esc_url( \wp_login_url() ) ) {
+				if ( $this->is_login_link( $href ) ) {
 					continue;
 				}
 
 				// Skip links to the logout page.
-				if ( $this->contains( $href, \esc_url( \wp_logout_url() ) ) ) {
+				if ( $this->is_logout_link( $href ) ) {
 					continue;
 				}
 
 				// Skip links to the register page.
-				if ( \esc_url( $href ) === \esc_url( \wp_registration_url() ) ) {
+				if ( $this->is_register_link( $href ) ) {
 					continue;
 				}
 
 				// Skip links to the lost password page.
-				if ( \esc_url( $href ) === \esc_url( \wp_lostpassword_url() ) ) {
+				if ( $this->is_lost_password_link( $href ) ) {
 					continue;
 				}
 
 				// Skip links to the home page.
-				if ( \esc_url( $href ) === \esc_url( \home_url() ) ) {
+				if ( $this->is_home_link( $href ) ) {
 					continue;
 				}
 
 				// Skip links to the current page.
-				if ( \esc_url( $href ) === \esc_url( $this->url ) ) {
+				if ( $this->is_current_link( $href ) ) {
 					continue;
 				}
 
 				// Skip links from custom functionality.
-				$skip = \apply_filters( 'wpseoc_skip_link', false, $href, $this->url, $this );
-				if ( $skip ) {
+				if ( $this->is_custom_link( $href ) ) {
 					continue;
 				}
 
@@ -196,6 +200,120 @@ class WebCrawler implements CrawlerEngine {
 		$this->crawler->clear();
 
 		return $links_data;
+	}
+
+	/**
+	 * Check if the link is admin link.
+	 *
+	 * @param string $href link to check.
+	 *
+	 * @return bool
+	 */
+	private function is_admin_link( string $href ): bool {
+		return $this->contains( $href, \esc_url( \admin_url() ) );
+	}
+
+	/**
+	 * Check if the link is login link.
+	 *
+	 * @param string $href link to check.
+	 *
+	 * @return bool
+	 */
+	private function is_login_link( string $href ): bool {
+		return \esc_url( $href ) === \esc_url( \wp_login_url() );
+	}
+
+	/**
+	 * Check if the link is logout link.
+	 *
+	 * @param string $href link to check.
+	 *
+	 * @return bool
+	 */
+	private function is_logout_link( string $href ): bool {
+		return $this->contains( $href, \esc_url( \wp_logout_url() ) );
+	}
+
+	/**
+	 * Check if the link is register link.
+	 *
+	 * @param string $href link to check.
+	 *
+	 * @return bool
+	 */
+	private function is_register_link( string $href ): bool {
+		return \esc_url( $href ) === \esc_url( \wp_registration_url() );
+	}
+
+	/**
+	 * Check if the link is lost password link.
+	 *
+	 * @param string $href link to check.
+	 *
+	 * @return bool
+	 */
+	private function is_lost_password_link( string $href ): bool {
+		return \esc_url( $href ) === \esc_url( \wp_lostpassword_url() );
+	}
+
+	/**
+	 * Check if the link is home link.
+	 *
+	 * @param string $href link to check.
+	 *
+	 * @return bool
+	 */
+	private function is_home_link( string $href ): bool {
+		return \esc_url( $href ) === \esc_url( \home_url() );
+	}
+
+	/**
+	 * Check if the link is current link.
+	 *
+	 * @param string $href link to check.
+	 *
+	 * @return bool
+	 */
+	private function is_current_link( string $href ): bool {
+		return \esc_url( $href ) === \esc_url( $this->url );
+	}
+
+	/**
+	 * Check if the link is custom link.
+	 *
+	 * @param string $href link to check.
+	 *
+	 * @return bool
+	 */
+	private function is_custom_link( string $href ): bool {
+		return \apply_filters( 'wpseoc_skip_link', false, $href, $this->url, $this );
+	}
+
+
+	/**
+	 * Check if the link starts with javascript.
+	 *
+	 * @param string $href link to check.
+	 *
+	 * @return bool
+	 */
+	private function is_start_with_javascript( string $href ): bool {
+		return $this->starts_with( $href, 'javascript' );
+	}
+
+	/**
+	 * Check if the link is internal.
+	 *
+	 * @param string $href The link to check.
+	 *
+	 * @return bool
+	 */
+	private function is_internal_link( string $href ): bool {
+		$home_url = \esc_url( \home_url() );
+		$href     = \esc_url( $href );
+
+		return $this->starts_with( $href, $home_url ) || $this->starts_with( $href, '/' );
 	}
 
 	/**

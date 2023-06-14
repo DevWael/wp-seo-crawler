@@ -204,6 +204,34 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 		$this->assertEquals( $expectedLinks, $crawler->crawl() );
 	}
 
+	public function testCrawlExcludesOutLinks() {
+		$this->working_stubs();
+		$html = '<html>
+				<head>
+					<title>Test</title>
+				</head>
+				<body>
+					<a href="https://google.com/">Page 1</a>
+					<a href="https://example.com/page2">Page 2</a>
+				</body>
+			</html>';
+		Functions\expect( 'wp_remote_retrieve_body' )->andReturn( $html );
+
+		$crawler = new WebCrawler( new Crawler() );
+		$crawler->set_url( 'https://example.com' );
+
+		$expectedLinks = [
+			[
+				'href'   => 'https://example.com/page2',
+				'text'   => 'Page 2',
+				'title'  => '',
+				'_blank' => false,
+			],
+		];
+
+		$this->assertEquals( $expectedLinks, $crawler->crawl() );
+	}
+
 	public function testCrawlExcludesLostPassword() {
 		$this->working_stubs();
 		$html = '<html>
