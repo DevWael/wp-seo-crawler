@@ -24,14 +24,14 @@ abstract class CrawlTask implements ProcessManager {
 	 *
 	 * @var string
 	 */
-	public const GROUP = 'wpseoc_crawler';
+	protected const GROUP = 'wpseoc_crawler';
 
 	/**
 	 * The task action.
 	 *
 	 * @var string
 	 */
-	public const ACTION = 'wpseoc_background_task_action';
+	protected $action;
 
 	/**
 	 * Crawl Task constructor.
@@ -59,7 +59,7 @@ abstract class CrawlTask implements ProcessManager {
 	 * @return bool
 	 */
 	public function is_scheduled(): bool {
-		return \as_has_scheduled_action( self::ACTION, $this->args, self::GROUP );
+		return \as_has_scheduled_action( $this->action, $this->args, self::GROUP );
 	}
 
 	/**
@@ -68,7 +68,7 @@ abstract class CrawlTask implements ProcessManager {
 	 * @return void
 	 */
 	public function unschedule(): void {
-		\as_unschedule_all_actions( self::ACTION, $this->args, self::GROUP );
+		\as_unschedule_all_actions( $this->action, $this->args, self::GROUP );
 	}
 
 	/**
