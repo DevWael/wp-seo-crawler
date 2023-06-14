@@ -172,7 +172,7 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				// Skip links to the current page.
-				if ( $this->contains( $href, esc_url( $this->url ) ) ) {
+				if ( \esc_url( $href ) === \esc_url( $this->url ) ) {
 					continue;
 				}
 
