@@ -4,13 +4,6 @@ namespace DevWael\WpSeoCrawler\Background_Workers;
 
 class ImmediateCrawl extends CrawlTask {
 	/**
-	 * Object of the crawler.
-	 *
-	 * @var WebCrawler
-	 */
-	protected $crawler;
-
-	/**
 	 * The task arguments.
 	 *
 	 * @var array
