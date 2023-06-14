@@ -24,7 +24,7 @@
 	},
 	"require": {
 		"ext-json": "*",
-		"symfony/css-selector": "^6.0",
+		"symfony/css-selector": "^5.0 || ^6.0",
 		"symfony/dom-crawler": "^5.4",
 		"woocommerce/action-scheduler": "^3.6"
 	},
