@@ -162,7 +162,7 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				// Skip links to the lost password page.
-				if ( $this->contains( $href, esc_url( wp_lostpassword_url() ) ) ) {
+				if ( \esc_url( $href ) === \esc_url( \wp_lostpassword_url() ) ) {
 					continue;
 				}
 
