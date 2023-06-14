@@ -30,6 +30,13 @@ namespace DevWael\WpSeoCrawler;
 defined( '\ABSPATH' ) || exit;
 
 /**
+ * Load the Action Scheduler library.
+ */
+if ( file_exists( \plugin_dir_path( __FILE__ ) . '/vendor/woocommerce/action-scheduler/action-scheduler.php' ) ) {
+	require \plugin_dir_path( __FILE__ ) . '/vendor/woocommerce/action-scheduler/action-scheduler.php';
+}
+
+/**
  * Load composer packages
  */
 $wpseoc_auto_load = plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
