@@ -44,10 +44,10 @@ class Admin_Page implements Options_Page {
 		HourlyCrawl $hourly_crawl = null
 	) {
 		$this->request         = $request ?? new Request();
-		$args                  = apply_filters(
+		$args                  = \apply_filters(
 			'wpseoc_crawler_task_args',
 			[
-				'url' => esc_url( home_url() ),
+				'url' => \esc_url( \home_url() ),
 			]
 		);
 		$this->immediate_crawl = $immediate_crawl ?? new ImmediateCrawl( $args );
@@ -239,6 +239,7 @@ class Admin_Page implements Options_Page {
 			$status = \sanitize_text_field( \wp_unslash( $request_query['status'] ) );
 			switch ( $status ) {
 				case 'success':
+					// todo: add a message to tell the user that the crawl has started and they should wait.
 					\add_settings_error(
 						'wpseoc_notice_messages',
 						'wpseoc_message',
