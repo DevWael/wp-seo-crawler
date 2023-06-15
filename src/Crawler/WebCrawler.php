@@ -187,11 +187,12 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				$links_data[] = [
-					'href'   => $href,
+					'found_at' => \untrailingslashit( $this->url ),
+					'href'     => \untrailingslashit( $href ),
 					//phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-					'text'   => $link->textContent,
-					'title'  => $link->getAttribute( 'title' ),
-					'_blank' => $link->hasAttribute( 'target' ) && $link->getAttribute( 'target' ) === '_blank',
+					'text'     => $link->textContent,
+					'title'    => $link->getAttribute( 'title' ),
+					'_blank'   => $link->hasAttribute( 'target' ) && $link->getAttribute( 'target' ) === '_blank',
 				];
 			}
 		}
