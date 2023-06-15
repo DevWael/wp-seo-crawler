@@ -64,10 +64,11 @@ class DataController {
 		return array_map(
 			static function ( $link ) {
 				return [
-					'href'   => esc_url( $link['href'] ),
-					'text'   => esc_html( $link['text'] ),
-					'title'  => esc_html( $link['title'] ),
-					'_blank' => $link->hasAttribute( 'target' ) && $link->getAttribute( 'target' ) === '_blank',
+					'found_at' => esc_url( $link['found_at'] ),
+					'href'     => esc_url( $link['href'] ),
+					'text'     => esc_html( $link['text'] ),
+					'title'    => esc_html( $link['title'] ),
+					'_blank'   => (bool) $link['_blank'],
 				];
 			},
 			$data
