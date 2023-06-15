@@ -3,6 +3,7 @@
 namespace DevWael\WpSeoCrawler\BackgroundWorkers;
 
 use DevWael\WpSeoCrawler\Crawler\WebCrawler;
+use DevWael\WpSeoCrawler\Storage\DataController;
 
 abstract class CrawlTask implements ProcessManager {
 	/**
@@ -34,16 +35,23 @@ abstract class CrawlTask implements ProcessManager {
 	protected $action;
 
 	/**
+	 * Object of the data controller.
+	 *
+	 * @var DataController
+	 */
+	private $data_controller;
+
+	/**
 	 * Crawl Task constructor.
 	 *
-	 * @param array           $args    The task arguments.
-	 * @param WebCrawler|null $crawler The Symfony DomCrawler object.
-	 *
-	 * @throws \InvalidArgumentException If the url is not set.
+	 * @param array               $args            The task arguments.
+	 * @param WebCrawler|null     $crawler         The Symfony DomCrawler object.
+	 * @param DataController|null $data_controller The data controller object.
 	 */
-	public function __construct( array $args = [], WebCrawler $crawler = null ) {
-		$this->crawler = $crawler ?? new WebCrawler();
-		$this->args    = $args;
+	public function __construct( array $args = [], WebCrawler $crawler = null, DataController $data_controller = null ) {
+		$this->crawler         = $crawler ?? new WebCrawler();
+		$this->data_controller = $data_controller ?? new DataController();
+		$this->args            = $args;
 	}
 
 	/**
@@ -81,7 +89,9 @@ abstract class CrawlTask implements ProcessManager {
 	public function run_task( string $url ): void {
 		$this->crawler->set_url( $url );
 		$crawl_data = $this->crawler->crawl();
-		// todo: handle the data and add storage.
+		$this->data_controller->update_url( $url );
+		$this->data_controller->delete();
+		$this->data_controller->save( $crawl_data );
 	}
 
 	/**
