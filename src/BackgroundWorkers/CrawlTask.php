@@ -1,6 +1,6 @@
 <?php
 
-namespace DevWael\WpSeoCrawler\Background_Workers;
+namespace DevWael\WpSeoCrawler\BackgroundWorkers;
 
 use DevWael\WpSeoCrawler\Crawler\WebCrawler;
 

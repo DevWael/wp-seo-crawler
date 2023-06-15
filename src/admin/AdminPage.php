@@ -2,13 +2,13 @@
 
 namespace DevWael\WpSeoCrawler\admin;
 
-use DevWael\WpSeoCrawler\Background_Workers\HourlyCrawl;
-use DevWael\WpSeoCrawler\Background_Workers\ImmediateCrawl;
+use DevWael\WpSeoCrawler\BackgroundWorkers\HourlyCrawl;
+use DevWael\WpSeoCrawler\BackgroundWorkers\ImmediateCrawl;
 
 /**
  * Admin page
  */
-class Admin_Page implements Options_Page {
+class AdminPage implements OptionsPage {
 
 	/**
 	 * Request object.

@@ -2,7 +2,7 @@
 
 namespace DevWael\WpSeoCrawler\admin;
 
-interface Options_Page {
+interface OptionsPage {
 
 	/**
 	 * Add options page to the admin menu.

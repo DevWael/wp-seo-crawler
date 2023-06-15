@@ -2,9 +2,9 @@
 
 namespace DevWael\WpSeoCrawler;
 
-use DevWael\WpSeoCrawler\admin\Admin_Page;
-use DevWael\WpSeoCrawler\Background_Workers\HourlyCrawl;
-use DevWael\WpSeoCrawler\Background_Workers\ImmediateCrawl;
+use DevWael\WpSeoCrawler\admin\AdminPage;
+use DevWael\WpSeoCrawler\BackgroundWorkers\HourlyCrawl;
+use DevWael\WpSeoCrawler\BackgroundWorkers\ImmediateCrawl;
 
 /**
  * The plugin main class that responsible for loading all plugin logic.
@@ -23,7 +23,7 @@ final class WpSeoCrawler {
 	/**
 	 * Admin page object.
 	 *
-	 * @var Admin_Page $admin_page instance of the admin page
+	 * @var AdminPage $admin_page instance of the admin page
 	 */
 	private $admin_page;
 
@@ -44,12 +44,12 @@ final class WpSeoCrawler {
 	/**
 	 * WpSeoCrawler constructor.
 	 *
-	 * @param Admin_Page     $admin_page      instance of the admin page.
+	 * @param AdminPage      $admin_page      instance of the admin page.
 	 * @param ImmediateCrawl $immediate_crawl instance of the immediate crawl.
 	 * @param HourlyCrawl    $hourly_crawl    instance of the hourly crawl.
 	 */
 	private function __construct(
-		Admin_Page $admin_page,
+		AdminPage $admin_page,
 		ImmediateCrawl $immediate_crawl,
 		HourlyCrawl $hourly_crawl
 	) {
@@ -61,19 +61,19 @@ final class WpSeoCrawler {
 	/**
 	 * Load class singleton instance.
 	 *
-	 * @param Admin_Page|null     $admin_page      instance of the admin page.
+	 * @param AdminPage|null      $admin_page      instance of the admin page.
 	 * @param ImmediateCrawl|null $immediate_crawl instance of the immediate crawl.
 	 * @param HourlyCrawl|null    $hourly_crawl    instance of the hourly crawl.
 	 *
 	 * @return WpSeoCrawler singleton instance
 	 */
 	public static function instance(
-		Admin_Page $admin_page = null,
+		AdminPage $admin_page = null,
 		ImmediateCrawl $immediate_crawl = null,
 		HourlyCrawl $hourly_crawl = null
 	): ?WpSeoCrawler {
 		if ( null === self::$instance ) {
-			$admin_page_object      = $admin_page ?? new Admin_Page(); // new instance of Admin_Page object.
+			$admin_page_object      = $admin_page ?? new AdminPage(); // new instance of Admin_Page object.
 			$immediate_crawl_object = $immediate_crawl ?? new ImmediateCrawl(); // new instance of ImmediateCrawl object.
 			$hourly_crawl_object    = $hourly_crawl ?? new HourlyCrawl(); // new instance of Hourly_Crawl object.
 			self::$instance         = new self( $admin_page_object, $immediate_crawl_object, $hourly_crawl_object );
