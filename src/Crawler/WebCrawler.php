@@ -124,7 +124,7 @@ class WebCrawler implements CrawlerEngine {
 					continue;
 				}
 
-				$href = $link->getAttribute( 'href' );
+				$href = untrailingslashit( $link->getAttribute( 'href' ) );
 
 				// Skip empty links.
 				if ( empty( $href ) ) {
@@ -187,11 +187,11 @@ class WebCrawler implements CrawlerEngine {
 				}
 
 				$links_data[] = [
-					'found_at' => \untrailingslashit( $this->url ),
-					'href'     => \untrailingslashit( $href ),
+					'found_at' => $this->url,
+					'href'     => trim( $href ),
 					//phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-					'text'     => $link->textContent,
-					'title'    => $link->getAttribute( 'title' ),
+					'text'     => trim( $link->textContent ),
+					'title'    => trim( $link->getAttribute( 'title' ) ),
 					'_blank'   => $link->hasAttribute( 'target' ) && $link->getAttribute( 'target' ) === '_blank',
 				];
 			}
