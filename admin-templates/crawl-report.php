@@ -1,6 +1,6 @@
 <?php
 
-use DevWael\WpSeoCrawler\admin\ReportView;
+use DevWael\WpSeoCrawler\Admin\ReportView;
 
 $wpseoc_data = new ReportView();
 $wpseoc_data->prepare_items();

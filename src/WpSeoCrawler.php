@@ -2,7 +2,7 @@
 
 namespace DevWael\WpSeoCrawler;
 
-use DevWael\WpSeoCrawler\admin\AdminPage;
+use DevWael\WpSeoCrawler\Admin\AdminPage;
 use DevWael\WpSeoCrawler\BackgroundWorkers\HourlyCrawl;
 use DevWael\WpSeoCrawler\BackgroundWorkers\ImmediateCrawl;
 

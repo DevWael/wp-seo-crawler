@@ -1,6 +1,6 @@
 <?php
 
-namespace DevWael\WpSeoCrawler\admin;
+namespace DevWael\WpSeoCrawler\Admin;
 
 use WP_List_Table;
 use DevWael\WpSeoCrawler\Storage\DataController;

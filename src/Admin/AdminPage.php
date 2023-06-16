@@ -1,6 +1,6 @@
 <?php
 
-namespace DevWael\WpSeoCrawler\admin;
+namespace DevWael\WpSeoCrawler\Admin;
 
 use DevWael\WpSeoCrawler\BackgroundWorkers\HourlyCrawl;
 use DevWael\WpSeoCrawler\BackgroundWorkers\ImmediateCrawl;

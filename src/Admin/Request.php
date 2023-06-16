@@ -1,6 +1,6 @@
 <?php
 
-namespace DevWael\WpSeoCrawler\admin;
+namespace DevWael\WpSeoCrawler\Admin;
 
 /**
  * This class provides the get request data.
