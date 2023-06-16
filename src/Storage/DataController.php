@@ -39,7 +39,7 @@ class DataController {
 	 * @param string $url The url to update.
 	 */
 	public function update_url( string $url = '' ): void {
-		$this->url = \esc_url( $url ?? \home_url() );
+		$this->url = \esc_url( $url ?: \home_url() );
 	}
 
 	/**
