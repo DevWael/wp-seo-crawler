@@ -79,7 +79,7 @@ class ReportView extends WP_List_Table {
 					'links_found' => $link['href'],
 					'text'        => $link['text'],
 					'title'       => $link['title'],
-					'new_tab'     => $link['_blank'] ? 'Yes' : 'No',
+					'new_tab'     => $link['_blank'] ? \esc_html__( 'Yes', 'wp-seo-crawler' ) : \esc_html__( 'No', 'wp-seo-crawler' ),
 				];
 			}
 
