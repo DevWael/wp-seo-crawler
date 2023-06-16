@@ -24,6 +24,8 @@
 
 namespace DevWael\WpSeoCrawler;
 
+use DevWael\WpSeoCrawler\FrontEnd\Routes\RewriteRule;
+
 /**
  * Check if loaded inside a WordPress environment.
  */
@@ -49,3 +51,14 @@ if ( ! class_exists( WpSeoCrawler::class ) && is_readable( $wpseoc_auto_load ) )
  * Create instance from the main plugin class
  */
 class_exists( WpSeoCrawler::class ) && WpSeoCrawler::instance();
+
+/**
+ * Flush rewrite rules on plugin activation to register the plugin rule.
+ */
+\register_activation_hook(
+	__FILE__,
+	static function () {
+		( new RewriteRule() )->register(); // initialize the rewrite rules.
+		flush_rewrite_rules();
+	}
+);
