@@ -42,6 +42,15 @@ class ReportView extends WP_List_Table {
 	}
 
 	/**
+	 * Get date and time format from WordPress.
+	 *
+	 * @return string
+	 */
+	private function date_time_format(): string {
+		return \get_option( 'date_format' ) . ' ' . \get_option( 'time_format' );
+	}
+
+	/**
 	 * Get latest update date.
 	 *
 	 * @return string The latest update date or empty string if no data.
@@ -49,7 +58,7 @@ class ReportView extends WP_List_Table {
 	public function get_latest_update(): string {
 		$data = $this->get_links();
 		if ( ! empty( $data ) ) {
-			return gmdate( 'd/m/Y - h:m A', $data['time'] );
+			return \get_date_from_gmt( gmdate( 'Y-m-d H:i:s', $data['time'] ), $this->date_time_format() );
 		}
 
 		return '';
