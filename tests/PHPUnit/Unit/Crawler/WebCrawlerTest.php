@@ -49,16 +49,18 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page1',
-				'text'   => 'Page 1',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page1',
+				'text'     => 'Page 1',
+				'title'    => '',
+				'_blank'   => false,
 			],
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -83,10 +85,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -111,10 +114,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -139,10 +143,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -167,10 +172,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 		$this->assertEquals( $expectedLinks, $crawler->crawl() );
@@ -194,10 +200,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -222,10 +229,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -250,10 +258,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -278,10 +287,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -306,10 +316,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -334,10 +345,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -362,10 +374,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -390,10 +403,11 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 
 		$expectedLinks = [
 			[
-				'href'   => 'https://example.com/page2',
-				'text'   => 'Page 2',
-				'title'  => '',
-				'_blank' => false,
+				'found_at' => 'https://example.com/page1',
+				'href'     => 'https://example.com/page2',
+				'text'     => 'Page 2',
+				'title'    => '',
+				'_blank'   => false,
 			],
 		];
 
@@ -441,11 +455,10 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 		$crawler->crawl();
 	}
 
-	public function testCrawlThrowsRuntimeExceptionIfRequestFailed(){
+	public function testCrawlThrowsRuntimeExceptionIfRequestFailed() {
 		$error = new class {
 			// phpcs:disable
-			public function get_error_message(): string
-			{
+			public function get_error_message(): string {
 				return 'error';
 			}
 			// phpcs:enable
@@ -454,7 +467,7 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 		Functions\expect( 'is_wp_error' )->andReturn( true );
 		$crawler = new WebCrawler( new Crawler() );
 		$crawler->set_url( 'https://example.com/nonexistent' );
-		$this->expectException(\RuntimeException::class);
+		$this->expectException( \RuntimeException::class );
 		$crawler->crawl();
 	}
 
