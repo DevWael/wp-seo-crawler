@@ -36,7 +36,7 @@ class ReportView extends WP_List_Table {
 	 * @return array<string,string> links
 	 */
 	private function get_links(): array {
-		$this->data_controller->update_url( \esc_url( \home_url() ) );
+		$this->data_controller->update_url();
 
 		return $this->data_controller->read();
 	}
