@@ -80,15 +80,17 @@ class DataController {
 	 *
 	 * @param array $data The data returned from the crawler.
 	 *
-	 * @return void
+	 * @return array saved data.
 	 */
-	public function save( array $data ): void {
+	public function save( array $data ): array {
 		$key  = $this->generate_key( $this->url );
 		$data = [
 			'links' => $this->escape_data( $data ),
 			'time'  => \time(),
 		];
 		$this->database_storage_service->set( $key, $data );
+
+		return $data;
 	}
 
 	/**
