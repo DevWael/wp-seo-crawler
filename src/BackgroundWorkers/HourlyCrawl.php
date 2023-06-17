@@ -22,7 +22,7 @@ class HourlyCrawl extends CrawlTask {
 	 * Schedule the crawl task in the next hour.
 	 *
 	 * @throws \InvalidArgumentException If the url is not set.
-	 * @return void
+	 * @return int The task id.
 	 */
 	public function schedule(): int {
 		if ( ! isset( $this->args['url'] ) ) {

@@ -20,7 +20,7 @@ class ImmediateCrawl extends CrawlTask {
 	/**
 	 * Schedule the crawl task.
 	 *
-	 * @return void
+	 * @return int The task id.
 	 * @throws \InvalidArgumentException If the url is not set.
 	 */
 	public function schedule(): int {
