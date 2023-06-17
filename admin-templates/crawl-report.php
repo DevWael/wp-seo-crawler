@@ -3,7 +3,10 @@
 use DevWael\WpSeoCrawler\Admin\ReportView;
 
 $wpseoc_data = new ReportView();
-$wpseoc_data->prepare_items();
+// check if WP_List_Table exists.
+if ( method_exists( $wpseoc_data, 'prepare_items' ) ) {
+	$wpseoc_data->prepare_items();
+}
 $wpseoc_latest_update = $wpseoc_data->get_latest_update();
 ?>
 <div class="wrap">
@@ -24,7 +27,9 @@ $wpseoc_latest_update = $wpseoc_data->get_latest_update();
 		</strong>
 		<?php
 	}
-	$wpseoc_data->display();
+	if ( method_exists( $wpseoc_data, 'display' ) ) {
+		$wpseoc_data->display();
+	}
 	?>
 
 </div>

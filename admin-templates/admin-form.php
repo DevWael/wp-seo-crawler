@@ -50,7 +50,7 @@ if ( isset( $wpseoc_settings['wpseoc_crawl_active'] ) ) {
 							</span>
 						</legend>
 						<label for="wpseoc_crawl_deactivate">
-							<input type="radio" name="wpseoc_crawl_status" id="wpseoc_crawl_deactivate" value="off" 
+							<input type="radio" name="wpseoc_crawl_status" id="wpseoc_crawl_deactivate" value="off"
 							<?php
 							checked( $wpseoc_crawl_active, 'off' )
 							?>
@@ -61,7 +61,7 @@ if ( isset( $wpseoc_settings['wpseoc_crawl_active'] ) ) {
 						</label>
 						<br>
 						<label for="wpseoc_crawl_active">
-							<input type="radio" name="wpseoc_crawl_status" id="wpseoc_crawl_active" value="on" 
+							<input type="radio" name="wpseoc_crawl_status" id="wpseoc_crawl_active" value="on"
 							<?php
 							checked( $wpseoc_crawl_active, 'on' )
 							?>
