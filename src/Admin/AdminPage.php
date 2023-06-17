@@ -272,8 +272,9 @@ class AdminPage implements OptionsPage {
 	/**
 	 * Display admin notices
 	 */
-	public function admin_notices(): void {
+	public function admin_notices(): string {
 		$request_query = $this->request->get();
+		$status        = '';
 		if ( isset( $request_query['page'], $request_query['status'] ) && 'wp-seo-crawler-settings' === $request_query['page'] ) {
 			$status = \sanitize_text_field( \wp_unslash( $request_query['status'] ) );
 			switch ( $status ) {
@@ -304,6 +305,8 @@ class AdminPage implements OptionsPage {
 					break;
 			}
 		}
+
+		return $status;
 	}
 
 	/**
