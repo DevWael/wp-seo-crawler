@@ -198,13 +198,15 @@ class AdminPage implements OptionsPage {
 	/**
 	 * Start the immediate crawl background task.
 	 *
-	 * @return void
+	 * @return int The task ID.
 	 */
-	public function start_instant_crawl(): void {
+	public function start_instant_crawl(): int {
 		$task = $this->immediate_crawl;
 		if ( false === $task->is_scheduled() ) {
-			$task->schedule();
+			return $task->schedule();
 		}
+
+		return 0;
 	}
 
 	/**
@@ -222,13 +224,15 @@ class AdminPage implements OptionsPage {
 	/**
 	 * Start the hourly crawl background task.
 	 *
-	 * @return void
+	 * @return int The task ID.
 	 */
-	public function start_hourly_crawl(): void {
+	public function start_hourly_crawl(): int {
 		$task = $this->hourly_crawl;
 		if ( false === $task->is_scheduled() ) {
-			$task->schedule();
+			return $task->schedule();
 		}
+
+		return 0;
 	}
 
 	/**
