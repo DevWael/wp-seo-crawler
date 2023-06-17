@@ -127,30 +127,46 @@ class AdminPage implements OptionsPage {
 	 * Process the options page form data
 	 */
 	public function process_save_options(): void {
-		// Check the nonce.
-		$this->check_nonce();
+		try {
+			// Check the nonce.
+			$this->check_nonce();
 
-		// Check the user has administrator permissions.
-		$this->check_permissions();
+			// Check the user has administrator permissions.
+			$this->check_permissions();
 
-		// Save the options.
-		$result = $this->save_options();
+			// Save the options.
+			$result = $this->save_options();
 
-		// Start or cancel the background tasks.
-		if ( 'success' === $result['status'] ) {
-			if ( 'on' === $result['value'] ) {
-				// Start the background tasks.
-				$this->start_instant_crawl();
-				$this->start_hourly_crawl();
-			} else {
-				// Cancel the background tasks.
-				$this->cancel_instant_crawl();
-				$this->cancel_hourly_crawl();
+			// Start or cancel the background tasks.
+			if ( 'success' === $result['status'] ) {
+				if ( 'on' === $result['value'] ) {
+					// Start the background tasks.
+					$this->start_instant_crawl();
+					$this->start_hourly_crawl();
+				} else {
+					// Cancel the background tasks.
+					$this->cancel_instant_crawl();
+					$this->cancel_hourly_crawl();
+				}
 			}
-		}
 
-		// Redirect to the options page.
-		$this->safe_redirect( $result['status'] );
+			// Redirect to the options page.
+			$this->safe_redirect( $result['status'] );
+		} catch ( \Throwable  $exception ) {
+			$this->display_error_message( $exception->getMessage() );
+		}
+	}
+
+
+	/**
+	 * Display error message when error occurs.
+	 *
+	 * @param string $message message string to be displayed.
+	 *
+	 * @return void
+	 */
+	private function display_error_message( string $message ): void {
+		\wp_die( \esc_html( $message ) );
 	}
 
 	/**
