@@ -95,21 +95,25 @@ class AdminPage implements OptionsPage {
 
 	/**
 	 * Verify the wp nonce.
+	 *
+	 * @throws \RuntimeException If the nonce didn't verify.
 	 */
 	private function check_nonce(): void {
 		$request_query = $this->request->post();
-		if ( ! isset( $request_query['_wpnonce'] ) || ! \wp_verify_nonce( sanitize_text_field( wp_unslash( $request_query['_wpnonce'] ) ) )
+		if ( ! isset( $request_query['_wpnonce'] ) || ! \wp_verify_nonce( \sanitize_text_field( \wp_unslash( $request_query['_wpnonce'] ) ) )
 		) {
-			\wp_die( \esc_html__( 'Sorry, your nonce did not verify.', 'wp-seo-crawler' ) );
+			throw new \RuntimeException( \esc_html__( 'Sorry, your nonce did not verify.', 'wp-seo-crawler' ) );
 		}
 	}
 
 	/**
 	 * Check if the current user has the required permissions.
+	 *
+	 * @throws \RuntimeException If the user doesn't have the permissions.
 	 */
 	private function check_permissions(): void {
 		if ( ! \current_user_can( 'manage_options' ) ) {
-			\wp_die( \esc_html__( 'Sorry, you are not allowed to access this page.', 'wp-seo-crawler' ) );
+			throw new \RuntimeException( \esc_html__( 'Sorry, you are not allowed to access this page.', 'wp-seo-crawler' ) );
 		}
 	}
 
