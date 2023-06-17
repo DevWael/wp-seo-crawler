@@ -1,12 +1,13 @@
 <?php
-putenv('TESTS_PATH='.__DIR__);
-putenv('LIBRARY_PATH='.dirname(__DIR__));
+
+putenv( 'TESTS_PATH=' . __DIR__ );
+putenv( 'LIBRARY_PATH=' . dirname( __DIR__ ) );
 $vendor = dirname( __FILE__, 3 ) . '/vendor/';
-if (! realpath($vendor)) {
-	die('Please install via Composer before running tests.');
+if ( ! realpath( $vendor ) ) {
+	die( 'Please install via Composer before running tests.' );
 }
-if (! defined('PHPUNIT_COMPOSER_INSTALL')) {
-	define('PHPUNIT_COMPOSER_INSTALL', $vendor.'autoload.php');
+if ( ! defined( 'PHPUNIT_COMPOSER_INSTALL' ) ) {
+	define( 'PHPUNIT_COMPOSER_INSTALL', $vendor . 'autoload.php' );
 }
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,6 +19,6 @@ if ( ! class_exists( WP_CLI_Command::class ) ) {
 	}
 }
 
-require_once $vendor.'/antecedent/patchwork/Patchwork.php';
-require_once $vendor.'autoload.php';
-unset($vendor);
+require_once $vendor . '/antecedent/patchwork/Patchwork.php';
+require_once $vendor . 'autoload.php';
+unset( $vendor );
