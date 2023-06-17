@@ -24,11 +24,11 @@ class HourlyCrawl extends CrawlTask {
 	 * @throws \InvalidArgumentException If the url is not set.
 	 * @return void
 	 */
-	public function schedule(): void {
+	public function schedule(): int {
 		if ( ! isset( $this->args['url'] ) ) {
 			throw new \InvalidArgumentException( esc_html__( 'The url is required', 'wp-seo-crawler' ) );
 		}
-		\as_schedule_recurring_action(
+		return \as_schedule_recurring_action(
 			time() + self::INTERVAL, // run the action after an hour from now.
 			self::INTERVAL, // set the action to run every 1 hour.
 			$this->action, // the action to run.

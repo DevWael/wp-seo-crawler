@@ -57,9 +57,9 @@ abstract class CrawlTask implements ProcessManager {
 	/**
 	 * Schedule the crawl task in the next hour.
 	 *
-	 * @return void
+	 * @return int
 	 */
-	abstract public function schedule(): void;
+	abstract public function schedule(): int;
 
 	/**
 	 * Check if the task is scheduled.

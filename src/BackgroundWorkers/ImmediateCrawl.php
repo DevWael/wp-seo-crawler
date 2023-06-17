@@ -23,11 +23,11 @@ class ImmediateCrawl extends CrawlTask {
 	 * @return void
 	 * @throws \InvalidArgumentException If the url is not set.
 	 */
-	public function schedule(): void {
+	public function schedule(): int {
 		if ( ! isset( $this->args['url'] ) ) {
 			throw new \InvalidArgumentException( esc_html__( 'The url is required', 'wp-seo-crawler' ) );
 		}
-		\as_enqueue_async_action( $this->action, $this->args, self::GROUP );
+		return \as_enqueue_async_action( $this->action, $this->args, self::GROUP );
 	}
 
 	/**

@@ -8,7 +8,7 @@ interface ProcessManager {
 	 *
 	 * @return void
 	 */
-	public function schedule(): void;
+	public function schedule(): int;
 
 	/**
 	 * Check if the task is scheduled.
