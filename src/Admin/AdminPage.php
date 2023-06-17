@@ -257,6 +257,15 @@ class AdminPage implements OptionsPage {
 	private function safe_redirect( string $status = 'success' ): void {
 		$url = \admin_url( 'admin.php?page=wp-seo-crawler-settings' );
 		\wp_safe_redirect( \add_query_arg( [ 'status' => \sanitize_text_field( $status ) ], \esc_url( $url ) ) );
+		$this->terminate();
+	}
+
+	/**
+	 * Terminate the script execution
+	 *
+	 * @return void
+	 */
+	public function terminate(): void {
 		exit;
 	}
 
