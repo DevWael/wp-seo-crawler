@@ -9,8 +9,13 @@ if (! defined('PHPUNIT_COMPOSER_INSTALL')) {
 	define('PHPUNIT_COMPOSER_INSTALL', $vendor.'autoload.php');
 }
 
-if(!class_exists(WP_CLI_Command::class)){
-	class WP_CLI_Command {}
+if ( ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', '/var/www/html/' );
+}
+
+if ( ! class_exists( WP_CLI_Command::class ) ) {
+	class WP_CLI_Command {
+	}
 }
 
 require_once $vendor.'/antecedent/patchwork/Patchwork.php';
