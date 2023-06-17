@@ -19,6 +19,11 @@ if ( ! class_exists( WP_CLI_Command::class ) ) {
 	}
 }
 
+if ( ! class_exists( WP_List_Table::class ) ) {
+	class WP_List_Table {
+	}
+}
+
 require_once $vendor . '/antecedent/patchwork/Patchwork.php';
 require_once $vendor . 'autoload.php';
 unset( $vendor );
