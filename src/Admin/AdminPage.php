@@ -82,7 +82,10 @@ class AdminPage implements OptionsPage {
 	 * Render the crawl report page.
 	 */
 	public function crawl_report(): void {
-		include \plugin_dir_path( \dirname( __FILE__, 2 ) ) . 'admin-templates/crawl-report.php';
+		$file = \plugin_dir_path( \dirname( __FILE__, 2 ) ) . 'admin-templates/crawl-report.php';
+		if ( file_exists( $file ) ) {
+			include $file;
+		}
 	}
 
 	/**
@@ -90,7 +93,10 @@ class AdminPage implements OptionsPage {
 	 */
 	public function render(): void {
 		$this->admin_notices();
-		include \plugin_dir_path( \dirname( __FILE__, 2 ) ) . 'admin-templates/admin-form.php';
+		$file = \plugin_dir_path( \dirname( __FILE__, 2 ) ) . 'admin-templates/admin-form.php';
+		if ( file_exists( $file ) ) {
+			include $file;
+		}
 	}
 
 	/**
