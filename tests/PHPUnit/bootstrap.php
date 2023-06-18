@@ -21,6 +21,8 @@ if ( ! class_exists( WP_CLI_Command::class ) ) {
 
 if ( ! class_exists( WP_List_Table::class ) ) {
 	class WP_List_Table {
+		public function __construct( array $args = array() ) {
+		}
 	}
 }
 

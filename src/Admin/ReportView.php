@@ -21,15 +21,13 @@ class ReportView extends WP_List_Table {
 	 */
 	public function __construct( DataController $data_controller = null ) {
 		$this->data_controller = $data_controller ?? new DataController();
-		if ( is_callable( 'parent::__construct' ) ) {
-			parent::__construct(
-				[
-					'singular' => \esc_html__( 'Link', 'wp-seo-crawler' ),
-					'plural'   => \esc_html__( 'Links', 'wp-seo-crawler' ),
-					'ajax'     => false,
-				]
-			);
-		}
+		parent::__construct(
+			[
+				'singular' => \esc_html__( 'Link', 'wp-seo-crawler' ),
+				'plural'   => \esc_html__( 'Links', 'wp-seo-crawler' ),
+				'ajax'     => false,
+			]
+		);
 	}
 
 	/**
