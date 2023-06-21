@@ -186,6 +186,7 @@ class AdminPage implements OptionsPage {
 		$settings = [
 			'wpseoc_crawl_active' => $status,
 		];
+		$settings = \apply_filters( 'wpseoc_save_settings', $settings, $request_query );
 		// Save the settings.
 		\update_option( 'wpseoc_options', $settings );
 
