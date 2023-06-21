@@ -427,7 +427,7 @@ class WebCrawlerTest extends AbstractUnitTestCase {
 			</html>';
 		Functions\expect( 'wp_remote_retrieve_body' )->andReturn( $html );
 
-		Filters\expectApplied( 'wpseoc_skip_link' )->andReturn( true );
+		Filters\expectApplied( 'wpseoc_webcrawler_skip_link' )->andReturn( true );
 
 		$crawler = new WebCrawler( new Crawler() );
 		$crawler->set_url( 'https://example.com/page1' );
