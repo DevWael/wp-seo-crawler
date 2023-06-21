@@ -21,18 +21,27 @@ class HourlyCrawl extends CrawlTask {
 	/**
 	 * Schedule the crawl task in the next hour.
 	 *
-	 * @throws \InvalidArgumentException If the url is not set.
 	 * @return int The task id.
+	 * @throws \InvalidArgumentException If the url is not set.
 	 */
 	public function schedule(): int {
 		if ( ! isset( $this->args['url'] ) ) {
 			throw new \InvalidArgumentException( esc_html__( 'The url is required', 'wp-seo-crawler' ) );
 		}
+
+		/**
+		 * Filter the task arguments.
+		 *
+		 * @param array  $args   The task arguments.
+		 * @param string $action The task action.
+		 */
+		$args = \apply_filters( 'wpseoc_crawler_task_args', $this->args, $this->action );
+
 		return \as_schedule_recurring_action(
 			time() + self::INTERVAL, // run the action after an hour from now.
 			self::INTERVAL, // set the action to run every 1 hour.
 			$this->action, // the action to run.
-			$this->args, // the action arguments.
+			$args, // the action arguments.
 			self::GROUP // the action group.
 		);
 	}

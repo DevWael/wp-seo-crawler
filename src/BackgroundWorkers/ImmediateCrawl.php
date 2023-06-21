@@ -27,7 +27,16 @@ class ImmediateCrawl extends CrawlTask {
 		if ( ! isset( $this->args['url'] ) ) {
 			throw new \InvalidArgumentException( esc_html__( 'The url is required', 'wp-seo-crawler' ) );
 		}
-		return \as_enqueue_async_action( $this->action, $this->args, self::GROUP );
+
+		/**
+		 * Filter the task arguments.
+		 *
+		 * @param array  $args   The task arguments.
+		 * @param string $action The task action.
+		 */
+		$args = \apply_filters( 'wpseoc_crawler_task_args', $this->args, $this->action );
+
+		return \as_enqueue_async_action( $this->action, $args, self::GROUP );
 	}
 
 	/**
