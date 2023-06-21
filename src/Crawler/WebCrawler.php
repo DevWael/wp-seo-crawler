@@ -76,7 +76,7 @@ class WebCrawler implements CrawlerEngine {
 			throw new \RuntimeException( $response->get_error_message() );
 		}
 
-		return $response;
+		return \apply_filters( 'wpseoc_webcrawler_request_response', $response, $this->url );
 	}
 
 	/**
