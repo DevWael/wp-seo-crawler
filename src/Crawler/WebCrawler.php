@@ -288,7 +288,7 @@ class WebCrawler implements CrawlerEngine {
 	 * @return bool
 	 */
 	private function is_custom_link( string $href ): bool {
-		return \apply_filters( 'wpseoc_skip_link', false, $href, $this->url, $this );
+		return \apply_filters( 'wpseoc_webcrawler_skip_link', false, $href, $this->url, $this );
 	}
 
 
