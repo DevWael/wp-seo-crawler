@@ -35,19 +35,14 @@ class WebCrawler implements CrawlerEngine {
 	 * @throws \RuntimeException If the page is not loaded.
 	 */
 	public function crawl(): array {
-		$data     = [];
 		$response = $this->get_request();
 		if ( ! $this->is_response_ok( $response ) ) {
 			throw new \RuntimeException( \esc_html__( 'Failed to fetch that URL', 'wp-seo-crawler' ) );
 		}
 		$html = $this->get_response_body( $response );
 		$this->add_html( $html );
-		$links = $this->extract_links();
-		foreach ( $links as $link ) {
-			$data[] = $link;
-		}
 
-		return $data;
+		return $this->extract_links();
 	}
 
 	/**
@@ -116,7 +111,8 @@ class WebCrawler implements CrawlerEngine {
 	 */
 	private function extract_links(): array {
 		$links_data = [];
-		$links      = $this->crawler->filter( 'a' );
+		$selector   = \apply_filters( 'wpseoc_link_css_selector', 'a', $this->url );
+		$links      = $this->crawler->filter( $selector );
 		if ( ! empty( $links ) ) {
 			foreach ( $links as $link ) {
 				// Skip links that don't have href attribute.
@@ -186,14 +182,19 @@ class WebCrawler implements CrawlerEngine {
 					continue;
 				}
 
-				$links_data[] = [
-					'found_at' => $this->url,
-					'href'     => trim( $href ),
-					//phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-					'text'     => trim( $link->textContent ),
-					'title'    => trim( $link->getAttribute( 'title' ) ),
-					'_blank'   => $link->hasAttribute( 'target' ) && $link->getAttribute( 'target' ) === '_blank',
-				];
+				$links_data[] = \apply_filters(
+					'wpseoc_single_link_data',
+					[
+						'found_at' => $this->url,
+						'href'     => trim( $href ),
+						//phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+						'text'     => trim( $link->textContent ),
+						'title'    => trim( $link->getAttribute( 'title' ) ),
+						'_blank'   => $link->hasAttribute( 'target' ) && $link->getAttribute( 'target' ) === '_blank',
+					],
+					$link,
+					$this->url
+				);
 			}
 		}
 

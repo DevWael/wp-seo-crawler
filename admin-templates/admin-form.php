@@ -78,6 +78,7 @@ if ( isset( $wpseoc_settings['wpseoc_crawl_active'] ) ) {
 					</fieldset>
 				</td>
 			</tr>
+			<?php do_action( 'wpseoc_admin_extra_fields', $wpseoc_settings ); ?>
 		</table>
 		<input type="hidden" name="action" value="wpseoc_save_options">
 		<?php

@@ -23,10 +23,12 @@ Components::header();
 		\esc_html_e( 'Sitemap', 'wp-seo-crawler' );
 		?>
 	</h1>
+	<?php do_action( 'wpseoc_before_sitemap_container' ); ?>
 	<div class="container">
 		<?php
 		if ( ! empty( $wpseoc_crawl_data['links'] ) ) {
 			?>
+			<?php do_action( 'wpseoc_before_sitemap' ); ?>
 			<ul>
 				<?php
 				foreach ( $wpseoc_crawl_data['links'] as $wpseoc_link ) {
@@ -45,17 +47,20 @@ Components::header();
 				}
 				?>
 			</ul>
+			<?php do_action( 'wpseoc_before_sitemap_creation_date' ); ?>
 			<div class="creation-date">
 				<?php
 				\esc_html_e( 'Created at: ', 'wp-seo-crawler' );
 				echo \esc_html( \get_date_from_gmt( gmdate( 'Y-m-d H:i:s', $wpseoc_crawl_data['time'] ), $wpseoc_time_format ) );
 				?>
 			</div>
+			<?php do_action( 'wpseoc_after_sitemap' ); ?>
 			<?php
 		} else {
 			\esc_html_e( 'No links found, please try again later!', 'wp-seo-crawler' );
 		}
 		?>
 	</div>
+<?php do_action( 'wpseoc_after_sitemap_container' ); ?>
 <?php
 Components::footer();
