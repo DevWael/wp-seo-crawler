@@ -225,4 +225,17 @@ class ReportViewTest extends AbstractUnitTestCase {
 		$actual      = $report_view->get_latest_update();
 		$this->assertEquals( 'date', $actual );
 	}
+
+	public function test_no_items(): void {
+		Functions\stubEscapeFunctions();
+		Functions\stubTranslationFunctions();
+		Functions\expect( 'home_url' )->andReturn( 'https://example.com' );
+		Functions\expect( 'admin_url' )->andReturn( 'https://example.com' );
+		Functions\expect( 'wp_kses_post' )->andReturnFirstArg();
+		$report_view = new ReportView();
+		ob_start();
+		$report_view->no_items();
+		$actual = ob_get_clean();
+		$this->assertStringStartsWith( 'No crawl data available yet', $actual );
+	}
 }

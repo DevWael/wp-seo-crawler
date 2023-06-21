@@ -45,16 +45,17 @@ Components::header();
 				}
 				?>
 			</ul>
+			<div class="creation-date">
+				<?php
+				\esc_html_e( 'Created at: ', 'wp-seo-crawler' );
+				echo \esc_html( \get_date_from_gmt( gmdate( 'Y-m-d H:i:s', $wpseoc_crawl_data['time'] ), $wpseoc_time_format ) );
+				?>
+			</div>
 			<?php
+		} else {
+			\esc_html_e( 'No links found, please try again later!', 'wp-seo-crawler' );
 		}
 		?>
-		<div class="creation-date">
-			<?php
-			esc_html_e( 'Created at: ', 'wp-seo-crawler' );
-			echo esc_html( \get_date_from_gmt( gmdate( 'Y-m-d H:i:s', $wpseoc_crawl_data['time'] ), $wpseoc_time_format ) );
-			?>
-		</div>
 	</div>
-
 <?php
 Components::footer();

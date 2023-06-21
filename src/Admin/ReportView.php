@@ -190,4 +190,17 @@ class ReportView extends WP_List_Table {
 
 		return '';
 	}
+
+	/**
+	 * Message to be displayed when there are no items.
+	 *
+	 * @return void
+	 */
+	public function no_items(): void {
+		printf(
+		/* translators: %s: Is the link to the crawler page. */
+			\wp_kses_post( \__( 'No crawl data available yet. Go to <a href="%s">Seo Crawler</a>, activate the crawler and wait for the results.', 'wp-seo-crawler' ) ),
+			\esc_url( admin_url( 'admin.php?page=wp-seo-crawler-settings' ) )
+		);
+	}
 }
