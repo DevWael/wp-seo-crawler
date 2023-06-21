@@ -30,10 +30,10 @@ WordPress has a set of functions to make HTTP requests. It will help to make the
 WordPress has a set of functions to make database queries. The plugin relies on `WP options API` for saving the results and getting the results from the database. 
 Since the plugin only crawl the homepage only, it will result in a small data need to be saved to database and the options API will be enough for this case. In other cases, we can use custom tables to save the data.
 
-## Sitemap HTML
+### Sitemap HTML
 Based on the crawl results, the plugin can display a sitemap.html page that contains all the links in the website. The sitemap.html page will rely on `WP Rewrite API` instead of saving a static HTML file. This will help to avoid the need to save a static HTML file and update it every time the website updated.
 
-## GitHub actions
+### GitHub actions
 GitHub actions will be used to run to workflows:
 1. The tests and check the code quality.
 2. The plugin release package
