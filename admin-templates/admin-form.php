@@ -72,7 +72,7 @@ if ( isset( $wpseoc_settings['wpseoc_crawl_active'] ) ) {
 						</label>
 						<p class="description">
 							<?php
-							esc_html_e( 'Once the crawler is activated, it will crawl the website once every hour.', 'wp-seo-crawler' );
+							esc_html_e( 'Once the crawler is activated, it will crawl the homepage immediately in the background and then crawl the website once every hour. Please wait for 2 minutes before checking the results.', 'wp-seo-crawler' );
 							?>
 						</p>
 					</fieldset>
