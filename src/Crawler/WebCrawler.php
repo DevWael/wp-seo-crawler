@@ -66,7 +66,12 @@ class WebCrawler implements CrawlerEngine {
 		if ( ! isset( $this->url ) ) {
 			throw new \RuntimeException( \esc_html__( 'The url is not set', 'wp-seo-crawler' ) );
 		}
-		$response = \wp_remote_get( $this->url );
+		$response = \wp_remote_get(
+			$this->url,
+			[
+				'sslverify' => \apply_filters( 'wpseoc_webcrawler_ssl_verify', true, $this->url ),
+			]
+		);
 		if ( \is_wp_error( $response ) ) {
 			throw new \RuntimeException( $response->get_error_message() );
 		}
