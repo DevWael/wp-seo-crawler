@@ -20,7 +20,7 @@ Components::header();
 ?>
 	<h1>
 		<?php
-		esc_html_e( 'Sitemap', 'wp-seo-crawler' );
+		\esc_html_e( 'Sitemap', 'wp-seo-crawler' );
 		?>
 	</h1>
 	<div class="container">
@@ -36,10 +36,10 @@ Components::header();
 						} elseif ( ! empty( $wpseoc_link['title'] ) ) {
 							$wpseoc_link_text = $wpseoc_link['title'];
 						} else {
-							$wpseoc_link_text = esc_html__( 'Link without info', 'wp-seo-crawler' );
+							$wpseoc_link_text = \esc_html__( 'Link without info', 'wp-seo-crawler' );
 						}
 						?>
-						<li><a href="<?php echo esc_url( $wpseoc_link['href'] ); ?>"><?php echo esc_html( $wpseoc_link_text ); ?></a></li>
+						<li><a href="<?php echo \esc_url( $wpseoc_link['href'] ); ?>"><?php echo \esc_html( $wpseoc_link_text ); ?></a></li>
 						<?php
 					}
 				}
