@@ -26,15 +26,15 @@ jobs:
 
       - name: Create Artifact
         run: |
-          zip -qq -r "wp-sew-crawler-plugin-${{ github.ref_name }}.zip" .
+          zip -qq -r "wp-seo-crawler-plugin-${{ github.ref_name }}.zip" .
 
       - name: "Upload release attachment"
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: wp-sew-crawler-plugin-${{ github.ref_name }}.zip
+          file: wp-seo-crawler-plugin-${{ github.ref_name }}.zip
           tag: ${{ github.ref_name }}
           overwrite: true
           body: |
             # ${{ env.TAG_NAME }}
-            Full WordPress plugin in `wp-sew-crawler-plugin-${{ github.ref_name }}.zip`.
+            Full WordPress plugin in `wp-seo-crawler-plugin-${{ github.ref_name }}.zip`.
